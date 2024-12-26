@@ -11,9 +11,15 @@ require("dotenv").config();
 mongoose.connect(process.env.MONGO_URL).then(() => console.log("DB connected")).catch((err) => console.log(err));
 
 //　ミドルウェア
+app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
+
+
+app.get("/", (req, res) => {
+  res.send("Hello express");
+});
 
 
 app.listen(PORT, () => console.log("Server is running on port 3000"));
